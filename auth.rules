@@ -1,0 +1,13 @@
+// dummy
+match /user/MOCK_USER/{document=**} {
+  allow read: if true;
+}
+match /incomes/MOCK_USER/{document=**} {
+  allow read: if true;
+}
+
+// user
+match /user/{userId} {      
+  allow create, update: if request.auth.uid == userId;
+  allow read: if true;
+}
