@@ -1,0 +1,16 @@
+# Temporal unrelated stuff
+functions/_temp
+
+# Firebase stuff
+functions/src/firebase/admin-config.json
+
+# Compiled JavaScript files
+functions/lib
+functions/lib/**/*.js
+functions/lib/**/*.js.map
+
+# TypeScript v1 declaration files
+functions/typings/
+
+# Node.js dependency directory
+functions/node_modules/
