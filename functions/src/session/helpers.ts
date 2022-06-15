@@ -1,4 +1,7 @@
 import { Request, Response } from 'express';
+import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
+import { from, Observable } from 'rxjs';
+import { admin } from '../firebase';
 
 function fourHundredAndFour(req: Request, res: Response) {
     req.method, req.path
@@ -12,4 +15,8 @@ function getTokenAndRemoteAddress(req: Request): { token: string; remoteAddress:
     return { token, remoteAddress: req.socket.remoteAddress! };
 }
 
-export { fourHundredAndFour, getTokenAndRemoteAddress };
+function verifyToken(token: string, checkRevoked = false): Observable<DecodedIdToken> {
+    return from(admin.auth().verifyIdToken(token, checkRevoked));
+}
+
+export { fourHundredAndFour, getTokenAndRemoteAddress, verifyToken };

@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { Changelog } from './changelog';
 import { Help } from './help';
 import { Login } from './login';
-import { Logout } from './logout/logout';
+import { Logout } from './logout';
 import { Status } from './status';
 import { TempLoginPage } from './temp-login-page';
 
