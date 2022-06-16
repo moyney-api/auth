@@ -1,5 +1,9 @@
 export const changelog: Changelog = [
     {
+        version: '0.1.2',
+        techChanges: ['Added tests with jest and supertest'],
+    },
+    {
         version: '0.1.1',
         techChanges: [
             'Made controllers become more scoped to their routes',

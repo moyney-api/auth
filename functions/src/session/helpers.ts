@@ -4,7 +4,6 @@ import { from, Observable } from 'rxjs';
 import { admin } from '../firebase';
 
 function fourHundredAndFour(req: Request, res: Response) {
-    req.method, req.path
     res.status(404).send(`route: ${req.path} has no implemented method: ${req.method}`);
 }
 
