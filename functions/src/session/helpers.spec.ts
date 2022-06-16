@@ -1,9 +1,9 @@
 import { firstValueFrom } from 'rxjs';
-import { helpers } from '../mocks/admin-auth.spec';
+import { adminAuthMock } from '../mocks/admin-auth.spec';
 import { verifyToken } from './helpers';
 
 describe('Helpers', () => {
-    const { mockToken, mockUid, spyOnVerifyIdToken } = helpers;
+    const { mockToken, mockUid, spyOnVerifyIdToken } = adminAuthMock;
 
     const verifySpy = spyOnVerifyIdToken();
 
