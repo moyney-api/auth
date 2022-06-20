@@ -1,5 +1,9 @@
 export const changelog: Changelog = [
     {
+        version: '0.1.3',
+        techChanges: ['Moved tests to it\'s own folder'],
+    },
+    {
         version: '0.1.2',
         techChanges: ['Added tests with jest and supertest'],
     },

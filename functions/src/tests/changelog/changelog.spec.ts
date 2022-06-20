@@ -1,8 +1,8 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { Changelog } from '.';
+import { Changelog } from '../../session/changelog';
 import { changelog } from '../../changelog';
-import { check404Methods } from '../../mocks/check-404.spec';
+import { check404Methods } from '../_mocks/check-404.spec';
 
 const app = express();
 Changelog('/changelog', app);

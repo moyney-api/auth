@@ -1,9 +1,9 @@
 import * as express from 'express';
 import * as request from 'supertest';
 import * as bodyParser from 'body-parser';
-import { check404Methods } from '../../mocks/check-404.spec';
-import { Login } from './login';
-import { adminAuthMock } from '../../mocks/admin-auth.spec';
+import { check404Methods } from '../_mocks/check-404.spec';
+import { Login } from '../../session/login';
+import { adminAuthMock } from '../_mocks/admin-auth.spec';
 
 const app = express();
 app.use(bodyParser.json());

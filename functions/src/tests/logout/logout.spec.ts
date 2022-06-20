@@ -1,8 +1,8 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { check404Methods } from '../../mocks/check-404.spec';
-import { Logout } from './logout';
-import { adminAuthMock } from '../../mocks/admin-auth.spec';
+import { check404Methods } from '../_mocks/check-404.spec';
+import { adminAuthMock } from '../_mocks/admin-auth.spec';
+import { Logout } from '../../session/logout';
 
 const app = express();
 Logout('/logout', app);

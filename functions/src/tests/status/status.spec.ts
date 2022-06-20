@@ -1,9 +1,9 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { check404Methods } from '../../mocks/check-404.spec';
-import { Status } from './status';
-import { adminAuthMock } from '../../mocks/admin-auth.spec';
-import * as helpers from '../helpers';
+import { check404Methods } from '../_mocks/check-404.spec';
+import { Status } from '../../session/status';
+import { adminAuthMock } from '../_mocks/admin-auth.spec';
+import * as helpers from '../../session/helpers';
 
 const app = express();
 Status('/status', app);

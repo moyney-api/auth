@@ -1,5 +1,5 @@
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
-import { admin } from '../firebase';
+import { admin } from '../../firebase';
 
 export const adminAuthMock = {
     mockUid: 'my-mock-uid',

@@ -1,4 +1,4 @@
-import { auth } from '.';
+import { auth } from '../';
 
 describe('auth microservice', () => {
     it('exists', () => {

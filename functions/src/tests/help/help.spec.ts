@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { Help, helpMessage } from './help';
-import { check404Methods } from '../../mocks/check-404.spec';
+import { Help, helpMessage } from '../../session/help';
+import { check404Methods } from '../_mocks/check-404.spec';
 
 const app = express();
 Help('/', app);
