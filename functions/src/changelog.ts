@@ -43,4 +43,4 @@ interface ChangelogChanges extends ChangelogVersion {
 interface ChangelogTechChanges extends ChangelogVersion {
     techChanges: string[];
 }
-type Changelog = (ChangelogChanges | ChangelogTechChanges)[];
+export type Changelog = (ChangelogChanges | ChangelogTechChanges)[];

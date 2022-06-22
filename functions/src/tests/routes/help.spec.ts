@@ -1,22 +1,20 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { Help, helpMessage } from '../../session/help';
+import { Help, helpMessage } from 'src/session/routes';
 import { check404Methods } from '../_mocks/check-404.spec';
 
 const app = express();
-Help('/', app);
+Help('/help', app);
+const helpApp = request(app);
 
 describe('Help', () => {
-    const helpApp = request(app);
-
-    it('GET', async () => {
-        await helpApp
-            .get('/')
-            .expect(200)
+    it('get', async () => {
+        await helpApp.get('/help')
             .expect((res) => {
+                expect(res.status).toBe(200);
                 expect(res.text).toBe(helpMessage);
             });
     });
 
-    check404Methods(['post', 'patch', 'delete'], helpApp, '/');
+    check404Methods(['patch', 'post', 'delete'], helpApp, '/help');
 });

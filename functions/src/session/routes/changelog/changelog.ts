@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { changelog } from '../../changelog';
+import { changelog } from '../../../changelog';
 import { fourHundredAndFour } from '../helpers';
 
 export function Changelog(route: string, router: Router) {

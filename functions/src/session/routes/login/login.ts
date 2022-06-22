@@ -1,11 +1,10 @@
 import { Router, Request, Response } from 'express';
-import { fourHundredAndFour, getTokenAndRemoteAddress } from '../helpers';
-import { LoginController } from './login-controller';
+import { SessionController } from 'src/session/controller/session.controller';
+import { fourHundredAndFour } from '../helpers';
 
 function login(req: Request, res: Response) {
-    const { token, remoteAddress } = getTokenAndRemoteAddress(req);
-
-    LoginController.login({ token, remoteAddress })
+    new SessionController(req)
+        .login()
         .subscribe({
             next: token => res.status(200).json({ token }),
             error: err => res.status(401).json(err),

@@ -1,11 +1,10 @@
 import { Router, Request, Response } from 'express';
-import { fourHundredAndFour, getTokenAndRemoteAddress } from '../helpers';
-import { StatusController } from './status-controller';
+import { SessionController } from 'src/session/controller/session.controller';
+import { fourHundredAndFour } from '../helpers';
 
 function getStatus(req: Request, res: Response) {
-    const { token, remoteAddress } = getTokenAndRemoteAddress(req);
-
-    StatusController.status({ token, remoteAddress })
+    new SessionController(req)
+        .status()
         .subscribe({
             next: ({ uid }) => res.status(200).json({ uid }),
             error: err => res.status(401).json(err),

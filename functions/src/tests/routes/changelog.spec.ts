@@ -1,23 +1,21 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { Changelog } from '../../session/changelog';
-import { changelog } from '../../changelog';
+import { Changelog } from 'src/session/routes';
+import { changelog } from 'src/changelog';
 import { check404Methods } from '../_mocks/check-404.spec';
 
 const app = express();
 Changelog('/changelog', app);
+const changelogApp = request(app);
 
 describe('Changelog', () => {
-    const changelogApp = request(app);
-
-    it('GET', async () => {
+    it('get', async () => {
         await changelogApp.get('/changelog')
-            .expect(200)
             .expect((res) => {
-                expect(res.body.length).toBeTruthy();
+                expect(res.status).toBe(200);
                 expect(res.body[0].version).toBe(changelog[0].version);
             });
     });
 
-    check404Methods(['post', 'patch', 'delete'], changelogApp, '/changelog');
+    check404Methods(['patch', 'post', 'delete'], changelogApp, '/changelog');
 });
