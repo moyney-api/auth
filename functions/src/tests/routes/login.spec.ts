@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as request from 'supertest';
-import { Login } from 'src/session/routes';
+import { Login } from '~/session/routes';
 import { check404Methods } from '../_mocks/check-404.spec';
 import { ACTIVE_TOKEN, AdminAuthMock } from '../_mocks/admin-auth.spec';
 

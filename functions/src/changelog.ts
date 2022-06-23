@@ -1,5 +1,16 @@
 export const changelog: Changelog = [
     {
+        version: '0.1.5',
+        changes: [
+            'Created endpoint for `isUsernameFree`',
+        ],
+        techChanges: [
+            'Updated compiler for proper typescript alias recognition',
+            'Separated checking if username exists from signup endpoint',
+            'Updated tests to include previous change',
+        ]
+    },
+    {
         version: '0.1.4',
         techChanges: ['Tests redone so they mirror the struct of the app'],
     },

@@ -31,7 +31,7 @@ export class SessionController {
     private getTokenAndRemoteAddress(req: Request): { token: string; remoteAddress: string } {
         const token = req.body?.token ||
             (req.headers.authorization?.split('Bearer ') || [])[1];
-    
+
         return { token, remoteAddress: req.socket.remoteAddress! };
     }
 };

@@ -1,5 +1,6 @@
 export * from './changelog';
 export * from './help';
+export * from './isUsernameFree';
 export * from './login';
 export * from './logout';
 export * from './signup';

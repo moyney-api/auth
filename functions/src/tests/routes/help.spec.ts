@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { Help, helpMessage } from 'src/session/routes';
+import { Help, helpMessage } from '~/session/routes';
 import { check404Methods } from '../_mocks/check-404.spec';
 
 const app = express();

@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { lastValueFrom } from 'rxjs';
-import { SessionController } from 'src/session/controller';
-import { ACTIVE_TOKEN, AdminAuthMock, CORRECT_REMOTE_ADDRESS, CORRECT_UID } from '../_mocks/admin-auth.spec';
+import { SessionController } from '~/session/controller';
+import { ACTIVE_TOKEN, AdminAuthMock, CORRECT_REMOTE_ADDRESS, CORRECT_UID, NON_EXISTENT_UID } from '../_mocks/admin-auth.spec';
 
 describe('Session Controller', () => {
     const adminAuthMock = new AdminAuthMock();
@@ -25,12 +25,12 @@ describe('Session Controller', () => {
 
     describe('signup', () => {
         it('should call verifyToken, get, create and delete user from auth', async () => {
-            const result = lastValueFrom(sessionController.signup('new-uid'));
+            const result = lastValueFrom(sessionController.signup(NON_EXISTENT_UID));
 
             await expect(result).resolves.toBe(true);
             expect(verifyTokenSpy).toHaveBeenCalledTimes(1);
             // check new uid and then get old uid user
-            expect(getUserSpy).toHaveBeenCalledTimes(2);
+            expect(getUserSpy).toHaveBeenCalledTimes(1);
             expect(createUserSpy).toHaveBeenCalledTimes(1);
             expect(deleteUserSpy).toHaveBeenCalledTimes(1);
         });

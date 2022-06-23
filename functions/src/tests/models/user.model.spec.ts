@@ -1,6 +1,6 @@
 import { lastValueFrom } from 'rxjs';
-import { User } from 'src/session/models';
-import { AdminAuthMock, CORRECT_UID, MOCK_USER, WRONG_UID } from '../_mocks/admin-auth.spec';
+import { User } from '~/session/models';
+import { AdminAuthMock, CORRECT_UID, MOCK_USER, NON_EXISTENT_UID } from '../_mocks/admin-auth.spec';
 
 describe('User Model', () => {
     const adminAuthMock = new AdminAuthMock();
@@ -23,7 +23,7 @@ describe('User Model', () => {
         });
 
         it('should error if uid is wrong', () => {
-            const userModel = new User(WRONG_UID);
+            const userModel = new User(NON_EXISTENT_UID);
             const user = lastValueFrom(userModel.get());
 
             expect(user).rejects.toThrowError('User not found');
@@ -44,9 +44,9 @@ describe('User Model', () => {
         it('should create the same user with a different uid', async () => {
             const userModel = new User(CORRECT_UID);
             const user = MOCK_USER;
-            await lastValueFrom(userModel.create({ ...user, uid: WRONG_UID }));
+            await lastValueFrom(userModel.create({ ...user, uid: NON_EXISTENT_UID }));
 
-            expect(adminAuthMock.mockUser?.uid).toBe(WRONG_UID);
+            expect(adminAuthMock.mockUser?.uid).toBe(NON_EXISTENT_UID);
             expect(spyOnCreateUser).toHaveBeenCalledTimes(1);
         });
 
@@ -70,7 +70,7 @@ describe('User Model', () => {
 
         it('should not delete the user if it doesnt exist', () => {
             const userModel = new User(adminAuthMock.mockUser!.uid);
-            const expectedError = lastValueFrom(userModel.delete(WRONG_UID));
+            const expectedError = lastValueFrom(userModel.delete(NON_EXISTENT_UID));
 
             expect(expectedError).rejects.toThrowError('User does not exist');
             expect(spyOnDeleteUser).toHaveBeenCalledTimes(1);
@@ -78,18 +78,17 @@ describe('User Model', () => {
     });
 
     describe('isUsernameTaken', () => {
-        it('should error when username exists', async () => {
+        it('should return false when username exists', async () => {
             const userModel = new User(CORRECT_UID);
-            const expectError = lastValueFrom(userModel.isUsernameFree(CORRECT_UID));
+            const result = lastValueFrom(userModel.isUsernameFree(CORRECT_UID));
 
-            expect(expectError).rejects.toThrowError('Username taken');
+            expect(result).resolves.toBe(false);
             expect(spyOnGetUser).toHaveBeenCalledTimes(1);
         });
 
-        it('should ok when username is not used', async () => {
-            const newUid = 'my-new-uid';
-            const userModel = new User(newUid);
-            const result = await lastValueFrom(userModel.isUsernameFree(newUid));
+        it('should return true when username is not used', async () => {
+            const userModel = new User(NON_EXISTENT_UID);
+            const result = await lastValueFrom(userModel.isUsernameFree(NON_EXISTENT_UID));
 
             expect(result).toBe(true);
             expect(spyOnGetUser).toHaveBeenCalledTimes(1);

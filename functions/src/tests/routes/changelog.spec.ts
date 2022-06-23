@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as request from 'supertest';
-import { Changelog } from 'src/session/routes';
-import { changelog } from 'src/changelog';
+import { Changelog } from '~/session/routes';
+import { changelog } from '~/changelog';
 import { check404Methods } from '../_mocks/check-404.spec';
 
 const app = express();

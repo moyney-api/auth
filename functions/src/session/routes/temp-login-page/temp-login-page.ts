@@ -4,7 +4,7 @@ import { fourHundredAndFour } from '../helpers';
 
 export function TempLoginPage(route: string, router: Router): void {
     const tempPage = (_: Request, res: Response) => {
-        res.sendFile(path.join(__dirname, '../../../_temp/test-login.html'));
+        res.sendFile(path.join(__dirname, './_temp/test-login.html'));
     }
 
     router.get(route, tempPage);

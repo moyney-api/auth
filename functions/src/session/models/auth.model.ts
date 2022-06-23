@@ -1,6 +1,6 @@
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 import { concatMap, from, map, Observable } from 'rxjs';
-import { admin } from 'src/firebase';
+import { admin } from '~/firebase';
 
 export class Auth {
     private token: string;

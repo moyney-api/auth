@@ -4,7 +4,7 @@ import { UserRecord } from 'firebase-functions/v1/auth';
 import { admin } from '../../firebase';
 
 export const CORRECT_UID = 'my-correct-uid';
-export const WRONG_UID = 'my-wrong-uid';
+export const NON_EXISTENT_UID = 'my-wrong-uid';
 export const ACTIVE_TOKEN = 'active-token';
 export const REVOKED_TOKEN = 'revoked-token';
 export const WRONG_TOKEN = 'wrong-token';
@@ -73,8 +73,8 @@ export class AdminAuthMock {
 
     private mockGetUser = (uid: string): Promise<UserRecord> => {
         return new Promise((resolve, reject) => {
-            if (uid === CORRECT_UID && this.mockUser) {
-                resolve(this.mockUser);
+            if (uid !== NON_EXISTENT_UID && this.mockUser) {
+                resolve(Object.assign({}, this.mockUser, { uid }));
             }
 
             reject(new Error('User not found'));
@@ -82,22 +82,24 @@ export class AdminAuthMock {
     }
 
     private mockCreateUser = (newUser: CreateRequest): Promise<UserRecord> => {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             if (newUser.uid === this.mockUser?.uid) {
                 resolve(this.mockUser!);
             } else if (!Object.values(newUser).filter(Boolean).length) {
                 this.mockUser = MOCK_USER;
                 resolve(this.mockUser);
-            } else if (newUser.uid !== this.mockUser?.uid) {
+            } else if (newUser.uid === NON_EXISTENT_UID) {
                 this.mockUser = Object.assign({}, MOCK_USER, newUser);
                 resolve(this.mockUser);
             }
+
+            reject(new Error('Username taken'));
         });
     }
 
     private mockDeleteUser = (uid: string): Promise<void> => {
         return new Promise((resolve, reject) => {
-            if (uid === this.mockUser?.uid) {
+            if (uid !== NON_EXISTENT_UID) {
                 delete this.mockUser;
                 resolve();
             }

@@ -1,5 +1,5 @@
 import { of } from 'rxjs';
-import { Auth } from 'src/session/models';
+import { Auth } from '~/session/models';
 import { CORRECT_UID } from './admin-auth.spec';
 
 export function spyOnCheckStatus() {

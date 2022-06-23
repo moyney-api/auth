@@ -1,6 +1,6 @@
 import { UserRecord } from 'firebase-functions/v1/auth';
 import { catchError, concatMap, from, map, Observable, of } from 'rxjs';
-import { admin } from 'src/firebase';
+import { admin } from '~/firebase';
 
 export class User {
     constructor(private uid: string) {}
@@ -31,11 +31,7 @@ export class User {
         return this.get(uid).pipe(
             catchError(noUser => of(null)),
             concatMap(foundUsername => {
-                if (foundUsername) {
-                    throw new Error('Username taken');
-                }
-
-                return of(true);
+                return of(foundUsername == null);
             }),
         );
     }

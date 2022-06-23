@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <title>Login solution</title>
+
+    <script type="module">
+        import "https://www.gstatic.com/firebasejs/9.8.3/firebase-app-compat.js";
+        import "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth-compat.js";
+
+        // Initialize Firebase
+        const app = firebase.initializeApp({
+            apiKey: "AIzaSyDqITlFFAxUT-INFvLlMXji5zbz4ZzJq5o",
+            authDomain: "moyney-balancer.firebaseapp.com",
+            databaseURL: "https://moyney-balancer.firebaseio.com",
+            projectId: "moyney-balancer",
+            storageBucket: "moyney-balancer.appspot.com",
+            messagingSenderId: "550325569702",
+            appId: "1:550325569702:web:9dba53edb507bbac9bcc67"
+        });
+
+        const ui = new firebaseui.auth.AuthUI(firebase.auth());
+        const uiConfig = {
+            callbacks: {
+                signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+                    const token = authResult.user._delegate.accessToken;
+                    console.log(authResult);
+                    document.getElementById('token-shower').innerText = token;
+                },
+                signInFailure(err) {
+                    console.error({ err });
+                },
+                uiShown: function () {
+                    document.getElementById('loader').style.display = 'none';
+                }
+            },
+            credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+            signInFlow: 'popup',
+            signInSuccessUrl: '#',
+            signInOptions: [
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            ],
+        };
+
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+</head>
+
+<body>
+    <h1>Moy sign in!</h1>
+    <div id="firebaseui-auth-container"></div>
+    <div id="token-shower" style="cursor: pointer" onclick="copyText()"></div>
+    <h2 id="copy-message" style="display: none;">Copied!!!</h2>
+    <div id="loader">Loading...</div>
+
+    <script>
+        function copyText() {
+            navigator.clipboard.writeText(document.getElementById('token-shower').innerText);
+            const message = document.getElementById('copy-message');
+            message.setAttribute('style', 'display: block');
+            setTimeout(() => {
+                message.setAttribute('style', 'display: none');
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

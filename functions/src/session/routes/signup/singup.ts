@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { SessionController } from 'src/session/controller/session.controller';
+import { SessionController } from '~/session/controller/session.controller';
 import { fourHundredAndFour } from '../helpers';
 
 function signup(req: Request, res: Response) {

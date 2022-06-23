@@ -9,10 +9,11 @@ export class UserController {
     }
 
     updateUid(newUid: string): Observable<boolean> {
-        return this.user.isUsernameFree(newUid).pipe(
-            concatMap(() => this.asignUidToUser(newUid)),
-            tap(() => this.uid = newUid),
-        );
+        return this.asignUidToUser(newUid).pipe(tap(() => this.uid = newUid));
+    }
+
+    isUsernameFree(username: string): Observable<boolean> {
+        return this.user.isUsernameFree(username);
     }
 
     private asignUidToUser(newUid: string): Observable<boolean> {
