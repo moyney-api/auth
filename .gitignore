@@ -1,5 +1,5 @@
 # Temporal unrelated stuff
-functions/_temp
+functions/src/session/routes/temp-login-page/_temp
 
 # Firebase stuff
 functions/src/firebase/admin-config.json
