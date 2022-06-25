@@ -10,11 +10,11 @@ The idea is that all other services can query certain endpoints in this service,
     <dt>GET /status</dt>
     <dd>check the current status of the token. Returns user uid when token is still alive</dd>
     <dt>POST /signup</dt>
-    <dd>sends a token with a username for the first time someone logins. This is so a user can select their username</dd>
+    <dd>expects a body <code>{ token: 'mytoken123', newUsername: 'my-new-uid' }</code> for the first time someone logins. This is so a user can select their username</dd>
     <dt>POST /isUsernameFree</dt>
-    <dd>send a username to check whether if it exists already on the db or not</dd>
+    <dd>expects a body <code>{ username: 'my-favorite-username' }</code> to check whether if it exists already on the db or not</dd>
     <dt>POST /login</dt>
-    <dd>expects a body <code>{ token: mytoken123 }</code> and returns the new token that will be used by moy services to handle authentication. Failing to do this step and using the default firebase token will result in logout</dd>
+    <dd>expects a body <code>{ token: 'mytoken123' }</code> and returns the new token that will be used by moy services to handle authentication. Failing to do this step and using the default firebase token will result in logout</dd>
     <dt>GET /logout</dt>
     <dd>Checks token in header, and if the token is alive, it revokes the session and logs out the user</dd>
 </dl>
