@@ -1,5 +1,14 @@
 export const changelog: Changelog = [
     {
+        version: '1.0.0',
+        changes: [
+            'Auth api first working version',
+        ],
+        techChanges: [
+            'Serving multiple firebase services is now possible with different ports',
+        ],
+    },
+    {
         version: '0.1.5',
         changes: [
             'Created endpoint for `isUsernameFree`',
@@ -8,7 +17,7 @@ export const changelog: Changelog = [
             'Updated compiler for proper typescript alias recognition',
             'Separated checking if username exists from signup endpoint',
             'Updated tests to include previous change',
-        ]
+        ],
     },
     {
         version: '0.1.4',
@@ -26,7 +35,7 @@ export const changelog: Changelog = [
         version: '0.1.1',
         techChanges: [
             'Made controllers become more scoped to their routes',
-            'Changelog now has a properly defined type'
+            'Changelog now has a properly defined type',
         ],
     },
     {
@@ -46,7 +55,7 @@ export const changelog: Changelog = [
     {
         version: '0.0.1',
         changes: ['First commit'],
-    }
+    },
 ];
 
 interface ChangelogVersion {

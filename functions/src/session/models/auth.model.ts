@@ -35,7 +35,7 @@ export class Auth {
     private verifyToken(checkRevoked = true): Observable<DecodedIdToken> {
         return from(admin.auth().verifyIdToken(this.token, checkRevoked));
     }
-    
+
     private setClaims(claims: { [claim: string]: string }): Observable<string> {
         return this.verifyToken(false).pipe(
             concatMap(decodedToken =>
@@ -43,6 +43,6 @@ export class Auth {
                     map(() => this.token),
                 )
             ),
-        )
+        );
     }
 }

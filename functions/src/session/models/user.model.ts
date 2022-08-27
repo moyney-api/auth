@@ -29,7 +29,7 @@ export class User {
 
     isUsernameFree(uid: string): Observable<boolean> {
         return this.get(uid).pipe(
-            catchError(noUser => of(null)),
+            catchError(() => of(null)),
             concatMap(foundUsername => {
                 return of(foundUsername == null);
             }),
